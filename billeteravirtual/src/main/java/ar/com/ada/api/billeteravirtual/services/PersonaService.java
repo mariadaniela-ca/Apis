@@ -41,8 +41,8 @@ public class PersonaService {
     }
 
 	public Persona save(Persona p) {
-        return repo.saveAndFlush(p);
+        return repo.save(p);
         
-	}
+    }
 
 }
