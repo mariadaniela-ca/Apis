@@ -8,7 +8,7 @@ import ar.com.ada.api.billeteravirtual.entities.Persona;
  * PersonaRepository
  */
 public interface PersonaRepository extends JpaRepository<Persona , Integer> {
-
+    
     Persona findByNombre(String nombre);
 
     Persona findByDni(String dni);

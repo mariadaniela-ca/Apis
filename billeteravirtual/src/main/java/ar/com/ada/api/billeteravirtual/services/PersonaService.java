@@ -1,11 +1,12 @@
 package ar.com.ada.api.billeteravirtual.services;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.com.ada.api.billeteravirtual.entities.*;
+import ar.com.ada.api.billeteravirtual.entities.Persona;
 import ar.com.ada.api.billeteravirtual.repo.PersonaRepository;
 
 /**
@@ -16,8 +17,10 @@ public class PersonaService {
 
     @Autowired
     PersonaRepository repo;
+ 
 
     public List<Persona> getPersonas() {
+        
         return repo.findAll();
     }
 
@@ -36,5 +39,10 @@ public class PersonaService {
             return p.get();
         return null;
     }
+
+	public Persona save(Persona p) {
+        return repo.saveAndFlush(p);
+        
+	}
 
 }

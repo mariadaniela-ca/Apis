@@ -5,8 +5,10 @@ package ar.com.ada.api.billeteravirtual.models.request;
  */
 public class RegistrationRequest {
 
-    public String fullName;
+    public String nombre;
+    public String dni;
+    public int edad;
     public String email;
-    public String password;
+   
 
 }
