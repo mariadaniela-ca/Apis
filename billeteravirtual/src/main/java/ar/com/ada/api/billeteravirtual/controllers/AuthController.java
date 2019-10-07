@@ -32,13 +32,7 @@ public class AuthController {
 
 
         RegistrationResponse r = new RegistrationResponse();
-        /*p.setNombre(req.nombre);
-        p.setDni(req.dni); 
-        p.setEdad(req.edad);  
-        p.setEmail(req.email);  
-*/
-        //personaService.save(p);  
-
+      
         Usuario u = usuarioService.crearUsuario(req.nombre,req.dni, req.edad,req.email, req.password);
         
         r.isOk = true;
