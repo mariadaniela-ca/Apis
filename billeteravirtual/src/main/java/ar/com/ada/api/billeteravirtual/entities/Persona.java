@@ -109,5 +109,14 @@ public class Persona {
     public void setBilletera(Billetera billetera) {
         this.billetera = billetera;
     }
+    /*public void setPersona(String nombre , String dni , int edad , String email){
+        Persona p = new Persona();
+        p.setNombre(nombre);
+        p.setDni(dni);
+        p.setEdad(edad);
+        p.setEmail(email);
+    }
+    */
+
 
 }

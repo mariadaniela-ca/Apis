@@ -16,33 +16,45 @@ import ar.com.ada.api.billeteravirtual.repo.PersonaRepository;
 public class PersonaService {
 
     @Autowired
-    PersonaRepository repo;
- 
+    PersonaRepository personaRepo;
 
     public List<Persona> getPersonas() {
-        
-        return repo.findAll();
+
+        return personaRepo.findAll();
     }
 
-    public Persona buscarPorNombre( String nombre){
-        return  repo.findByNombre(nombre);
+    public Persona buscarPorNombre(String nombre) {
+        return personaRepo.findByNombre(nombre);
     }
 
-    public Persona buscarPorDni(String dni){
-        return repo.findByDni(dni);
+    public Persona buscarPorDni(String dni) {
+        return personaRepo.findByDni(dni);
     }
 
-    public Persona buscarPorId(int id){
-        Optional <Persona> p = repo.findById(id);
-         
-        if(p.isPresent())
+    public Persona buscarPorId(int id) {
+        Optional<Persona> p = personaRepo.findById(id);
+
+        if (p.isPresent())
             return p.get();
         return null;
     }
 
-	public Persona save(Persona p) {
-        return repo.save(p);
-        
+    public void save(Persona p) {
+        personaRepo.save(p);
+
+    }
+
+    public Persona crearPersona(String nombre, String dni, int edad, String email){
+        Persona p = new Persona();
+
+        p.setNombre(nombre);
+        p.setDni(dni);
+        p.setEdad(edad);
+        p.setEmail(email);
+
+        personaRepo.save(p);
+
+        return p;
     }
 
 }

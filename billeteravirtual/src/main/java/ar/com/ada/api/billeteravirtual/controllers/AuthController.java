@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ada.api.billeteravirtual.entities.Persona;
+import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.models.request.RegistrationRequest;
 import ar.com.ada.api.billeteravirtual.models.response.RegistrationResponse;
 import ar.com.ada.api.billeteravirtual.services.PersonaService;
+import ar.com.ada.api.billeteravirtual.services.UsuarioService;
 
 
 /**
@@ -16,27 +18,32 @@ import ar.com.ada.api.billeteravirtual.services.PersonaService;
  */
 @RestController
 public class AuthController {
-    
+
     @Autowired
     PersonaService personaService;
 
+    @Autowired
+    UsuarioService usuarioService;
 
+
+    //Registro de una persona
     @PostMapping("auth/register")
     public RegistrationResponse postRegisterUser(@RequestBody RegistrationRequest req){
 
 
         RegistrationResponse r = new RegistrationResponse();
+        /*p.setNombre(req.nombre);
+        p.setDni(req.dni); 
+        p.setEdad(req.edad);  
+        p.setEmail(req.email);  
+*/
+        //personaService.save(p);  
 
-        Persona p = new Persona();
-        p.setNombre(req.nombre);
-        p.setDni(req.dni);
-        p.setEdad(req.edad);
-        p.setEmail(req.email);
+        Usuario u = usuarioService.crearUsuario(req.nombre,req.dni, req.edad,req.email, req.password);
+        
         r.isOk = true;
         r.message = "Te registraste con exito";
-
-        personaService.save(p);
-
+       
         return r;
         
     }

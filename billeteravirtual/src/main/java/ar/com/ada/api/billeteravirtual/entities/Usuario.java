@@ -2,6 +2,8 @@ package ar.com.ada.api.billeteravirtual.entities;
 
 import javax.persistence.*;
 
+import ar.com.ada.api.billeteravirtual.security.Crypto;
+
 /**
  * Usuario
  */
@@ -37,7 +39,8 @@ public class Usuario {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Crypto.encrypt(password, this.getUsername());
+        
     }
 
     public String getPassword() {
@@ -71,6 +74,10 @@ public class Usuario {
      * public Usuario(int personaId) { this.personaId = personaId; }
      */
 
+     public void setPersonaId(int personaId){
+        personaId = persona.getPersonaId();
+     }
+
     public Persona getPersona() {
         return persona;
     }
@@ -86,5 +93,6 @@ public class Usuario {
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
     }
+
 
 }
