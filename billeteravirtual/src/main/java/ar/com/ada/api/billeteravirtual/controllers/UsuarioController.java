@@ -16,6 +16,7 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
+    
 
     @GetMapping("/usuarios/{id}")
     public Usuario getUsuarioById(@PathVariable int id) {

@@ -2,6 +2,8 @@ package ar.com.ada.api.billeteravirtual.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 import ar.com.ada.api.billeteravirtual.security.Crypto;
 
 /**
@@ -9,6 +11,7 @@ import ar.com.ada.api.billeteravirtual.security.Crypto;
  */
 @Entity
 @Table(name = "usuario")
+
 public class Usuario {
     @Id
     @Column(name = "usuario_id")

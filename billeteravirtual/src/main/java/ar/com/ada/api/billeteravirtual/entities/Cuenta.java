@@ -29,12 +29,11 @@ public class Cuenta {
 
     private double saldo;
 
+    @Column(name = "saldo_disponible")
     private double saldoDisponible;
 
-    // private String movimiento2;
-
     public Cuenta() {
-
+    
     }
 
     public void setMoneda(String moneda) {

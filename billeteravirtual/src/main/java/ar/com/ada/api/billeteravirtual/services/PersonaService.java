@@ -18,6 +18,7 @@ public class PersonaService {
     @Autowired
     PersonaRepository personaRepo;
 
+    //Trae una lista de personas
     public List<Persona> getPersonas() {
 
         return personaRepo.findAll();

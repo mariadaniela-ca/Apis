@@ -10,6 +10,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 /**
  * Billetera
  */
+
 @Entity
 @Table(name = "billetera")
 public class Billetera {
@@ -64,30 +65,6 @@ public class Billetera {
 
     public void setBilleteraId(int billeteraId) {
         this.billeteraId = billeteraId;
-    }
-
-    public static void movimientoTransferencia(double importe, Usuario usuarioOrigen, Usuario usuarioDestino) {
-
-        Movimiento m = new Movimiento();
-        m.setImporte(importe);
-        m.setDeUsuarioId(usuarioOrigen.getUsuarioId());
-        m.setAUsuarioId(usuarioDestino.getUsuarioId());
-        m.setConceptoDeOperacion("Transferencia");
-        m.setFechaMovimiento(new Date());
-        m.setEstado(0);
-        m.setCuentaOrigenId(usuarioOrigen.getPersona().getPersonaId());
-        m.setCuentaDestinoId(usuarioDestino.getPersona().getPersonaId());
-        m.setCuenta(usuarioOrigen.getPersona().getBilletera().getCuentas().get(0));
-
-        
-        
-
-
-
-
-
-
-
     }
 
 }

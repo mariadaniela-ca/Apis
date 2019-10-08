@@ -34,6 +34,7 @@ public class UsuarioService {
         return null;
     }
 
+    //Crea la persona, el usuario, una cuenta en pesos y la billetera.
     public Usuario crearUsuario(String nombre, String dni, int edad, String email, String password) {
 
         Persona persona = new Persona();
@@ -55,7 +56,6 @@ public class UsuarioService {
         //La primera cuenta se crea en pesos argentinos
         cuenta.setMoneda("ARS");
         billetera.agregarCuenta(cuenta);
-        
         billetera.setPersona(persona);
 
         personaService.save(persona);
