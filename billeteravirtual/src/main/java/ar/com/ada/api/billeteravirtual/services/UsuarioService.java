@@ -1,5 +1,6 @@
 package ar.com.ada.api.billeteravirtual.services;
 
+import java.util.Date;
 //import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,15 @@ public class UsuarioService {
         u.setEmail(persona.getEmail());
 
         persona.setUsuario(u);
+
+        Billetera billetera = new Billetera();
+
+        Cuenta cuenta = new Cuenta();
+        //La primera cuenta se crea en pesos argentinos
+        cuenta.setMoneda("ARS");
+        billetera.agregarCuenta(cuenta);
+        
+        billetera.setPersona(persona);
 
         personaService.save(persona);
 
