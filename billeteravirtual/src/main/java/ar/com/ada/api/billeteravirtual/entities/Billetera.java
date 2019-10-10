@@ -36,7 +36,9 @@ public class Billetera {
         this.persona = persona;
         this.persona.setBilletera(this);
     }
-
+    public Cuenta getCuenta(int index){
+        return getCuentas().get(index);
+    }
     public List<Cuenta> getCuentas() {
         return cuentas;
     }
