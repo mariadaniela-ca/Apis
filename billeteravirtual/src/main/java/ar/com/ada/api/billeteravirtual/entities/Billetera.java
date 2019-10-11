@@ -36,9 +36,11 @@ public class Billetera {
         this.persona = persona;
         this.persona.setBilletera(this);
     }
-    public Cuenta getCuenta(int index){
+
+    public Cuenta getCuenta(int index) {
         return getCuentas().get(index);
     }
+
     public List<Cuenta> getCuentas() {
         return cuentas;
     }
@@ -67,6 +69,16 @@ public class Billetera {
 
     public void setBilleteraId(int billeteraId) {
         this.billeteraId = billeteraId;
+    }
+    public Cuenta buscarCuenta(String moneda) {
+        for (Cuenta cuenta : this.cuentas) {
+            if (moneda.equals(cuenta.getMoneda())) {
+                return cuenta;
+            }
+
+        }
+
+        return null;
     }
 
 }

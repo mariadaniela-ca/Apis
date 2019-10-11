@@ -1,5 +1,7 @@
 package ar.com.ada.api.billeteravirtual.controllers;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,33 +29,33 @@ public class BilleteraController {
         return b;
     }
 
-    @PostMapping("/billeteras/transferencias")
-    public MovimientoResponse transferencia(@RequestBody MovimientoRequest req){
-
+    @PostMapping("/billeteras/{id}/transferencias")
+    public MovimientoResponse transferencia(@PathVariable int id, @RequestBody MovimientoRequest req) {
 
         MovimientoResponse r = new MovimientoResponse();
 
-        billeteraService.transferirDinero(req.importe, req.id, req.conceptoDeOperacion, req.tipoDeOperacion);
+        Billetera b = billeteraService.buscarPorId(id);
+        
 
+        billeteraService.transferirDinero(b,req.importe, req.email, req.conceptoDeOperacion, req.tipoDeOperacion,req.moneda);
 
         r.message = "Transferencia realizada con éxito";
 
         return r;
     }
-      
-    @GetMapping("/billeteras/{id}/saldo")
-    public double getSaldo(@PathVariable int id) {
 
-        double b = billeteraService.getSaldo(id);
+    @GetMapping("/billeteras/{id}/saldo")
+    public BigDecimal getSaldo(@PathVariable int id) {
+
+        BigDecimal b = billeteraService.getSaldo(id);
         return b;
     }
 
     @GetMapping("/billeteras/{id}/saldoDisponible")
-    public double getSaldoDisponible(@PathVariable int id) {
+    public BigDecimal getSaldoDisponible(@PathVariable int id) {
 
-        double b = billeteraService.getSaldoDisponible(id);
+        BigDecimal b = billeteraService.getSaldoDisponible(id);
         return b;
     }
-
 
 }

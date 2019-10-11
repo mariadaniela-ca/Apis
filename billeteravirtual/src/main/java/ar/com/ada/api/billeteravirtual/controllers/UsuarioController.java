@@ -1,5 +1,7 @@
 package ar.com.ada.api.billeteravirtual.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,13 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
     
+    @GetMapping("/usuarios")
+    public List<Usuario> getUsuarios() {
+
+        List<Usuario> listaUsuarios = usuarioService.getUsuarios();
+
+        return listaUsuarios;
+    }
 
     @GetMapping("/usuarios/{id}")
     public Usuario getUsuarioById(@PathVariable int id) {

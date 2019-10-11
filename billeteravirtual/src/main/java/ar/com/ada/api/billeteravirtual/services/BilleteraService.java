@@ -1,5 +1,6 @@
 package ar.com.ada.api.billeteravirtual.services;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.Optional;
 
@@ -38,29 +39,26 @@ public class BilleteraService {
         return null;
     }
 
-    public Billetera traerBilletera(Usuario usuario){
-        
-        Billetera b=  usuario.getPersona().getBilletera();
+    public Billetera traerBilletera(Usuario usuario) {
+
+        Billetera b = usuario.getPersona().getBilletera();
 
         return b;
 
     }
-    
 
-    
-    public void transferirDinero(double importe, int id, String conceptoDeOperacion, String tipoDeOperacion) {
+    public void transferirDinero(Billetera billeteraOrigen, BigDecimal importe, String email, String conceptoDeOperacion, String tipoDeOperacion, String moneda) {
 
-        Usuario usuarioDestino = usuarioService.buscarPorId(id);
-        Usuario usuarioOrigen = usuarioService.buscarPorId(78);
+        Usuario usuarioDestino = usuarioService.buscarUsuarioPorEmail(email);
 
-        Billetera bOrigen = traerBilletera(usuarioOrigen);
-
+        Usuario usuarioOrigen = billeteraOrigen.getPersona().getUsuario();
+        
         Movimiento enviarDinero = new Movimiento();
-        enviarDinero.setImporte(-(importe));
+        enviarDinero.setImporte(importe.negate());
         enviarDinero.setDeUsuarioId(usuarioOrigen.getUsuarioId());
         enviarDinero.setAUsuarioId(usuarioDestino.getUsuarioId());
-        enviarDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().getBilleteraId());
-        enviarDinero.setCuentaOrigenId(usuarioOrigen.getPersona().getBilletera().getBilleteraId());
+        enviarDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
+        enviarDinero.setCuentaOrigenId(usuarioOrigen.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
         enviarDinero.setConceptoDeOperacion(conceptoDeOperacion);
         enviarDinero.setFechaMovimiento(new Date());
         enviarDinero.setEstado(0);
@@ -74,10 +72,10 @@ public class BilleteraService {
 
         Movimiento recibirDinero = new Movimiento();
         recibirDinero.setImporte(importe);
-        recibirDinero.setDeUsuarioId(bOrigen.getPersona().getUsuario().getUsuarioId());
+        recibirDinero.setDeUsuarioId(usuarioOrigen.getPersona().getUsuario().getUsuarioId());
         recibirDinero.setAUsuarioId(usuarioDestino.getUsuarioId());
-        recibirDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().getBilleteraId());
-        recibirDinero.setCuentaOrigenId(bOrigen.getBilleteraId());
+        recibirDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
+        recibirDinero.setCuentaOrigenId(usuarioOrigen.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
         recibirDinero.setConceptoDeOperacion("Regalo");
         recibirDinero.setFechaMovimiento(new Date());
         recibirDinero.setEstado(0);
@@ -88,7 +86,7 @@ public class BilleteraService {
 
     }
 
-    public double getSaldo(int id) {
+    public BigDecimal getSaldo(int id) {
         Optional<Billetera> b = billeteraRepo.findById(id);
 
         if (b.isPresent()){
@@ -96,10 +94,10 @@ public class BilleteraService {
           
             return c.getSaldo();
         }
-        return id;
+        return null;
 
     }
-    public double getSaldoDisponible(int id) {
+    public BigDecimal getSaldoDisponible(int id) {
         Optional<Billetera> b = billeteraRepo.findById(id);
 
         if (b.isPresent()){
@@ -107,6 +105,6 @@ public class BilleteraService {
           
             return c.getSaldoDisponible();
         }
-        return id;
+      return null;
     }
 }

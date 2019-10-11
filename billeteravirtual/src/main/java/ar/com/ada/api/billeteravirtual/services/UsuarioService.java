@@ -1,12 +1,16 @@
 package ar.com.ada.api.billeteravirtual.services;
 
-import java.util.Date;
+import java.util.List;
 //import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.com.ada.api.billeteravirtual.entities.*;
+import ar.com.ada.api.billeteravirtual.entities.Billetera;
+import ar.com.ada.api.billeteravirtual.entities.Cuenta;
+import ar.com.ada.api.billeteravirtual.entities.Persona;
+import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.repo.UsuarioRepository;
 
 /**
@@ -21,6 +25,12 @@ public class UsuarioService {
     @Autowired
     PersonaService personaService;
 
+    public List<Usuario> getUsuarios() {
+
+        return usuarioRepo.findAll();
+    }
+
+
     public void save(Usuario u) {
 
         usuarioRepo.save(u);
@@ -34,6 +44,11 @@ public class UsuarioService {
         return null;
     }
 
+    public Usuario buscarUsuarioPorEmail(String email){
+
+        Usuario u = usuarioRepo.findByEmail(email);
+        return u;
+    }
     //Crea la persona, el usuario, una cuenta en pesos y la billetera.
     public Usuario crearUsuario(String nombre, String dni, int edad, String email, String password) {
 
@@ -55,6 +70,7 @@ public class UsuarioService {
         Cuenta cuenta = new Cuenta();
         //La primera cuenta se crea en pesos argentinos
         cuenta.setMoneda("ARS");
+        
         billetera.agregarCuenta(cuenta);
         billetera.setPersona(persona);
 

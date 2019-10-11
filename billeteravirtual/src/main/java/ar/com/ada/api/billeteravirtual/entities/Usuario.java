@@ -1,8 +1,15 @@
 package ar.com.ada.api.billeteravirtual.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ar.com.ada.api.billeteravirtual.security.Crypto;
 
@@ -19,13 +26,13 @@ public class Usuario {
     private int usuarioId;
 
     private String username;
-
+    @JsonIgnore
     private String password;
 
     private String email;
-
     @OneToOne
     @JoinColumn(name = "persona_id", referencedColumnName = "persona_id")
+
     private Persona persona;
 
     // public Cuenta cuenta;

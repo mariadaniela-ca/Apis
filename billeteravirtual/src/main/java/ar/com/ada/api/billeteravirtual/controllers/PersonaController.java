@@ -20,13 +20,13 @@ public class PersonaController {
     PersonaService personaService;
 
     //Trae la lista completa de personas existente
-    @GetMapping("/personas")
+   @GetMapping("/personas")
     public List<Persona> getPersonas() {
 
         List<Persona> listaPersonas = personaService.getPersonas();
 
         return listaPersonas;
-    }
+    } 
 
     //Trae una sola persona a través de su Id 
     @GetMapping("/personas/{id}")
@@ -37,11 +37,4 @@ public class PersonaController {
         return p;
     }
 
-  /*  @GetMapping("/personas/{nombre}")
-    public Persona getPersonaByNombre(@PathVariable String nombre) {
-        Persona p = personaService.buscarPorNombre(nombre);
-
-        return p;
-    }
-*/
 }

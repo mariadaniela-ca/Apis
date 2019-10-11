@@ -1,5 +1,6 @@
 package ar.com.ada.api.billeteravirtual.entities;
 
+import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
 
@@ -18,35 +19,33 @@ public class Movimiento {
     @ManyToOne
     @JoinColumn(name = "cuenta_id", referencedColumnName = "cuenta_id")
     private Cuenta cuenta;
-
+    @Column(name = "fecha_movimiento")
     private Date fechaMovimiento;
 
     // private Coordenada ubicacion;
 
-    private Double importe;
-
+    private BigDecimal importe;
+    @Column(name = "tipo_de_operacion")
     private String tipoDeOperacion;
-
+    
+    @Column(name = "concepto_de_operacion")
     private String conceptoDeOperacion;
 
     private String detalle;
 
     private int estado;
 
-    // private Usuario deUsuario;
-    @Column(name = "deUsuario_id")
+    @Column(name = "de_usuario_id")
     private int deUsuarioId;
 
-    // private Usuario aUsuario;
-    @Column(name = "aUsuario_id")
+    @Column(name = "a_usuario_id")
     private int aUsuarioId;
-
-    // private Cuenta cuentaDestino;
-    @Column(name = "cuentaDestino_id")
+    
+    @Column(name = "cuenta_destino_id")
     private int cuentaDestinoId;
 
-    // private Cuenta cuentaOrigen;
-    @Column(name = "cuentaOrigen_id")
+
+    @Column(name = "cuenta_origen_id")
     private int cuentaOrigenId;
 
     public Cuenta getCuenta() {
@@ -73,11 +72,11 @@ public class Movimiento {
         this.fechaMovimiento = fechaMovimiento;
     }
 
-    public Double getImporte() {
+    public BigDecimal getImporte() {
         return importe;
     }
 
-    public void setImporte(Double importe) {
+    public void setImporte(BigDecimal importe) {
         this.importe = importe;
     }
 
@@ -143,6 +142,10 @@ public class Movimiento {
 
     public void setCuentaOrigenId(int cuentaOrigenId) {
         this.cuentaOrigenId = cuentaOrigenId;
+    }
+
+    public void setaUsuarioId(int aUsuarioId) {
+        this.aUsuarioId = aUsuarioId;
     }
 
 }

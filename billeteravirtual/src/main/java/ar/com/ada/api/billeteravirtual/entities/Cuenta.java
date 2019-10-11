@@ -1,5 +1,6 @@
 package ar.com.ada.api.billeteravirtual.entities;
 
+import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
 
@@ -27,10 +28,10 @@ public class Cuenta {
 
     private String moneda;
 
-    private double saldo;
+    private BigDecimal saldo;
 
     @Column(name = "saldo_disponible")
-    private double saldoDisponible;
+    private BigDecimal saldoDisponible;
 
     public Cuenta() {
     
@@ -44,11 +45,11 @@ public class Cuenta {
         return moneda;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
@@ -70,12 +71,13 @@ public class Cuenta {
     }
 
     public void agregarMovimiento(Movimiento movimiento) {
-
+        
         movimiento.setCuenta(this);
         movimientos.add(movimiento);
-        this.setSaldo(this.getSaldo() + movimiento.getImporte());
-        this.setSaldoDisponible(this.getSaldo());
 
+        this.setSaldo(this.getSaldo().add(movimiento.getImporte()));
+        this.setSaldoDisponible(this.getSaldo());
+        
     }
 
     public int getNroCuentaId() {
@@ -90,12 +92,18 @@ public class Cuenta {
         return moneda;
     }
 
-    public double getSaldoDisponible() {
+    public BigDecimal getSaldoDisponible() {
         return saldoDisponible;
     }
 
-    public void setSaldoDisponible(double saldoDisponible) {
+    public void setSaldoDisponible(BigDecimal saldoDisponible) {
         this.saldoDisponible = saldoDisponible;
+    }
+    public Usuario getUsuario(){
+
+        Usuario u = this.getBilletera().getPersona().getUsuario();
+        return u;
+        
     }
 
 }
