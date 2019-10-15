@@ -1,7 +1,7 @@
 package ar.com.ada.api.billeteravirtual.services;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import ar.com.ada.api.billeteravirtual.entities.Billetera;
 import ar.com.ada.api.billeteravirtual.entities.Cuenta;
 import ar.com.ada.api.billeteravirtual.entities.Movimiento;
-import ar.com.ada.api.billeteravirtual.entities.Persona;
 import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.repo.BilleteraRepository;
 
@@ -56,6 +55,7 @@ public class BilleteraService {
         Movimiento enviarDinero = new Movimiento();
         enviarDinero.setImporte(importe.negate());
         enviarDinero.setDeUsuarioId(usuarioOrigen.getUsuarioId());
+        enviarDinero.setCuenta(usuarioOrigen.getPersona().getBilletera().getCuenta(0));
         enviarDinero.setAUsuarioId(usuarioDestino.getUsuarioId());
         enviarDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
         enviarDinero.setCuentaOrigenId(usuarioOrigen.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
@@ -66,7 +66,7 @@ public class BilleteraService {
 
         //bOrigen.agregarMovimiento(enviarDinero);
         
-        usuarioOrigen.getPersona().getBilletera().agregarMovimiento(enviarDinero);
+        usuarioOrigen.getPersona().getBilletera().agregarM(enviarDinero);
         billeteraRepo.save(usuarioOrigen.getPersona().getBilletera());
         //billeteraRepo.save.update(usuarioOrigen.getPersona().getBilletera());
 
@@ -81,7 +81,7 @@ public class BilleteraService {
         recibirDinero.setEstado(0);
         recibirDinero.setTipoDeOperacion("Transferencia");
 
-        usuarioDestino.getPersona().getBilletera().agregarMovimiento(recibirDinero);
+        usuarioDestino.getPersona().getBilletera().agregarM(recibirDinero);
         billeteraRepo.save(usuarioDestino.getPersona().getBilletera());
 
     }

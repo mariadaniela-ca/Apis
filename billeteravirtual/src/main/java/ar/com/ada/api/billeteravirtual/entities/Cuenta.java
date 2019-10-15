@@ -72,11 +72,16 @@ public class Cuenta {
 
     public void agregarMovimiento(Movimiento movimiento) {
         
+    
         movimiento.setCuenta(this);
         movimientos.add(movimiento);
 
+     
+
         this.setSaldo(this.getSaldo().add(movimiento.getImporte()));
         this.setSaldoDisponible(this.getSaldo());
+
+        
         
     }
 
