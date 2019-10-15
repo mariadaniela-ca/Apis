@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -19,10 +21,12 @@ public class Cuenta {
     private int nroCuentaId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "billetera_id", referencedColumnName = "billetera_id")
     private Billetera billetera;
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+    @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Movimiento> movimientos = new ArrayList<Movimiento>();
 
@@ -34,7 +38,7 @@ public class Cuenta {
     private BigDecimal saldoDisponible;
 
     public Cuenta() {
-    
+
     }
 
     public void setMoneda(String moneda) {
@@ -71,18 +75,13 @@ public class Cuenta {
     }
 
     public void agregarMovimiento(Movimiento movimiento) {
-        
-    
+
         movimiento.setCuenta(this);
         movimientos.add(movimiento);
-
-     
 
         this.setSaldo(this.getSaldo().add(movimiento.getImporte()));
         this.setSaldoDisponible(this.getSaldo());
 
-        
-        
     }
 
     public int getNroCuentaId() {
@@ -104,11 +103,12 @@ public class Cuenta {
     public void setSaldoDisponible(BigDecimal saldoDisponible) {
         this.saldoDisponible = saldoDisponible;
     }
-    public Usuario getUsuario(){
+
+    public Usuario getUsuario() {
 
         Usuario u = this.getBilletera().getPersona().getUsuario();
         return u;
-        
+
     }
 
 }

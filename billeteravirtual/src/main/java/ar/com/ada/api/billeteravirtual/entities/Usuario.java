@@ -32,7 +32,7 @@ public class Usuario {
     private String email;
     @OneToOne
     @JoinColumn(name = "persona_id", referencedColumnName = "persona_id")
-
+    @JsonIgnore
     private Persona persona;
 
     // public Cuenta cuenta;

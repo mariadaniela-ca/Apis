@@ -1,6 +1,7 @@
 package ar.com.ada.api.billeteravirtual.controllers;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ada.api.billeteravirtual.entities.Billetera;
+import ar.com.ada.api.billeteravirtual.entities.Movimiento;
 import ar.com.ada.api.billeteravirtual.models.request.MovimientoRequest;
 import ar.com.ada.api.billeteravirtual.models.response.MovimientoResponse;
 import ar.com.ada.api.billeteravirtual.services.BilleteraService;
+
 
 /**
  * BilleteraController
@@ -56,6 +59,14 @@ public class BilleteraController {
 
         BigDecimal b = billeteraService.getSaldoDisponible(id);
         return b;
+    }
+
+    @GetMapping("/billeteras/{id}/movimientos")
+    public List<Movimiento> getMovimientos(@PathVariable int id){
+        List<Movimiento> listaMovimientos = billeteraService.movimientos(id);
+
+        return listaMovimientos;
+
     }
 
 }

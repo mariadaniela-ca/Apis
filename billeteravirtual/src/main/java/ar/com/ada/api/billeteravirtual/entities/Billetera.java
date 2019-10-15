@@ -57,7 +57,7 @@ public class Billetera {
 
     }
 
-    public void agregarM(Movimiento movimiento) {
+    public void agregarMovimiento(Movimiento movimiento) {
 
         List<Cuenta> tmpCuentas = this.getCuentas();
         tmpCuentas.get(0).agregarMovimiento(movimiento);
