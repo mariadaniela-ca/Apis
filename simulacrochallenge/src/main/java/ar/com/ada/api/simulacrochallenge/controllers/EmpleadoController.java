@@ -39,7 +39,7 @@ public class EmpleadoController {
     }
 
     @GetMapping("/empleados")
-    public List<Empleado> getPersonas() {
+    public List<Empleado> getEmpleados() {
 
         List<Empleado> listaEmpleados = empleadoService.getEmpleados();
 
