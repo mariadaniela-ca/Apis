@@ -1,6 +1,7 @@
 package ar.com.ada.api.simulacrochallenge.services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +61,6 @@ public class EmpleadoService {
 
     }
 
-
     public Empleado actualizarEmpleadoporId(int id, String nombre, int edad, int categoriaId){
 
         Categoria c= categoriaService.buscarCategoriaPorId(categoriaId);
@@ -94,5 +94,21 @@ public class EmpleadoService {
         empleadoRepo.save(e);
 
         return e;
+    }
+
+    public List<Empleado> getEmpleadoPorCategorias(int id) {
+
+        Categoria c = categoriaService.buscarCategoriaPorId(id);
+
+        List<Empleado> listaEmpleados = c.getEmpleados();
+
+        //e.setCategoria(c);
+
+        //listaEmpleados.add(e);
+
+        return listaEmpleados;
+        
+        //e.setCategoria(categoriaService.buscarCategoriaPorId(id));
+    
     }
 }

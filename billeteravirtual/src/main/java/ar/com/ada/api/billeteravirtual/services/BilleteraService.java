@@ -62,8 +62,7 @@ public class BilleteraService {
         enviarDinero.setDeUsuarioId(usuarioOrigen.getUsuarioId());
         enviarDinero.setCuenta(usuarioOrigen.getPersona().getBilletera().getCuenta(0));
         enviarDinero.setAUsuarioId(usuarioDestino.getUsuarioId());
-        enviarDinero
-                .setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
+        enviarDinero.setCuentaDestinoId(usuarioDestino.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
         enviarDinero.setCuentaOrigenId(usuarioOrigen.getPersona().getBilletera().buscarCuenta(moneda).getNroCuentaId());
         enviarDinero.setConceptoDeOperacion(conceptoDeOperacion);
         enviarDinero.setFechaMovimiento(new Date());
@@ -71,7 +70,7 @@ public class BilleteraService {
         enviarDinero.setTipoDeOperacion("Transferencia");
 
         // bOrigen.agregarMovimiento(enviarDinero);
-
+   
         usuarioOrigen.getPersona().getBilletera().agregarMovimiento(enviarDinero);
         billeteraRepo.save(usuarioOrigen.getPersona().getBilletera());
         // billeteraRepo.save.update(usuarioOrigen.getPersona().getBilletera());
@@ -118,7 +117,7 @@ public class BilleteraService {
     }
 
     public List<Movimiento> movimientos(int id) {
-        Optional < Billetera> b = billeteraRepo.findById(id);
+        Optional<Billetera> b = billeteraRepo.findById(id);
 
         if (b.isPresent()) {
             Cuenta c = b.get().getCuenta(0);
@@ -126,5 +125,6 @@ public class BilleteraService {
             return c.getMovimientos();
         }
         return null;
+
     }
 }

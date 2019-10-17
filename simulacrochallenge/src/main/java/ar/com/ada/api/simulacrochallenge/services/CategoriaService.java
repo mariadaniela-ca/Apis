@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.simulacrochallenge.entities.Categoria;
+import ar.com.ada.api.simulacrochallenge.entities.Empleado;
 import ar.com.ada.api.simulacrochallenge.repo.CategoriaRepository;
 
 /**
@@ -27,7 +28,6 @@ public class CategoriaService {
         Categoria categoria = new Categoria();
         categoria.setNombre(nombre);
         categoria.setSueldoBase(sueldoBase);
-
         categoriaRepo.save(categoria);
 
         return categoria;

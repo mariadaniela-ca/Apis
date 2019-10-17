@@ -11,5 +11,5 @@ import ar.com.ada.api.simulacrochallenge.entities.Empleado;
 @Repository
 public interface EmpleadoRepository extends JpaRepository <Empleado , Integer> {
 
-    
+
 }

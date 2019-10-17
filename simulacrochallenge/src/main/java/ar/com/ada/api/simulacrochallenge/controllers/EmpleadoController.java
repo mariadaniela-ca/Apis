@@ -53,6 +53,16 @@ public class EmpleadoController {
         return e;
     }
 
+    @GetMapping("/empleados/categorias/{categoriaId}")
+        public List<Empleado> getEmpleadosPorCategoriaId(@PathVariable int categoriaId){
+        
+            List<Empleado> listaEmpleados = empleadoService.getEmpleadoPorCategorias(categoriaId);
+            return listaEmpleados;
+    
+
+        }
+
+
     @PutMapping("empleados/{id}")
     public EmpleadoResponse putActualizarDatosEmpleado(@PathVariable int id, @RequestBody EmpleadoRequest req) {
 
