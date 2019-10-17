@@ -28,7 +28,7 @@ public class CategoriaController {
 
 
         CategoriaResponse r = new CategoriaResponse();
-        Categoria c = categoriaService.registrarCategoria(req.nombre, req.sueldoBase);
+        categoriaService.registrarCategoria(req.nombre, req.sueldoBase);
 
         r.message = "Categoria registrada con exito";
 
