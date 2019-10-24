@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.billeteravirtual.entities.Billetera;
@@ -12,6 +13,7 @@ import ar.com.ada.api.billeteravirtual.entities.Cuenta;
 import ar.com.ada.api.billeteravirtual.entities.Persona;
 import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.repo.UsuarioRepository;
+import ar.com.ada.api.billeteravirtual.security.Crypto;
 
 /**
  * UsuarioService
@@ -84,6 +86,17 @@ public class UsuarioService {
 
         Usuario u = usuarioRepo.findByUsername(username);
         return u;
+
+    }
+
+    public void login(String username, String password) {
+
+        Usuario u = usuarioRepo.findByUsername(username);
+
+        if (u == null || !u.getPassword().equals(Crypto.encrypt(password, u.getUsername()))) {
+
+            throw new BadCredentialsException("Usuario o contraseña invalida");
+        }
 
     }
 
