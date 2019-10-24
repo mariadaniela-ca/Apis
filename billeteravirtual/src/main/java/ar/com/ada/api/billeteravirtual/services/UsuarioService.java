@@ -80,4 +80,11 @@ public class UsuarioService {
 
     }
 
+    public Usuario buscarPorUsername(String username){
+
+        Usuario u = usuarioRepo.findByUsername(username);
+        return u;
+
+    }
+
 }

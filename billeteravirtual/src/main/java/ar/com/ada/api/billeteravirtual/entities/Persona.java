@@ -24,7 +24,7 @@ public class Persona {
 
     private String email;
 
-    @JsonIgnore
+    
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     private Usuario usuario;
     
