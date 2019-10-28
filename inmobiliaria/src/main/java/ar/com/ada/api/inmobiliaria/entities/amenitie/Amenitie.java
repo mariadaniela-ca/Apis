@@ -1,6 +1,17 @@
 package ar.com.ada.api.inmobiliaria.entities.amenitie;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
 
 /**
  * Amenitie
@@ -13,6 +24,10 @@ public class Amenitie {
     @Column(name = "amenitie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int amenitieId;
+
+
+    @ManyToMany(mappedBy = "amenities")
+    private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
     
     private String descripcion;
 

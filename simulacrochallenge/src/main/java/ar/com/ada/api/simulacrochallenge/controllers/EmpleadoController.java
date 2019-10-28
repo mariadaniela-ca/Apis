@@ -30,7 +30,7 @@ public class EmpleadoController {
 
         EmpleadoResponse r = new EmpleadoResponse();
         
-        Empleado e = empleadoService.registrarEmpleado(req.nombre, req.edad, req.categoriaId, req.sueldo, req.estado);
+        empleadoService.registrarEmpleado(req.nombre, req.edad, req.categoriaId, req.sueldo, req.estado);
 
         r.message = "Empleado registrado con exito";
 
@@ -68,7 +68,7 @@ public class EmpleadoController {
 
         EmpleadoResponse r = new EmpleadoResponse();
 
-        Empleado e = empleadoService.actualizarEmpleadoporId(id, req.nombre, req.edad, req.categoriaId);
+        empleadoService.actualizarEmpleadoporId(id, req.nombre, req.edad, req.categoriaId);
 
         r.message = "Empleado actualizado con éxito";
 
@@ -80,7 +80,7 @@ public class EmpleadoController {
 
         EmpleadoResponse r = new EmpleadoResponse();
 
-        Empleado e = empleadoService.actualizarSueldoporId(id, req.sueldo);
+       empleadoService.actualizarSueldoporId(id, req.sueldo);
 
         r.message = "El sueldo ha sido actualizado ";
 
@@ -90,7 +90,7 @@ public class EmpleadoController {
     @DeleteMapping("empleados/{id}")
     public Empleado darDeBajaEmpleadoPorId(@PathVariable int id){
 
-        Empleado e= empleadoService.darDeBajaEmpleado(id);
+        Empleado e = empleadoService.darDeBajaEmpleado(id);
 
         return e;
     }

@@ -1,10 +1,16 @@
 package ar.com.ada.api.inmobiliaria.entities.persona;
 
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
+import ar.com.ada.api.inmobiliaria.entities.usuario.Usuario;
 
 /**
  * Locatario
@@ -13,6 +19,9 @@ import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
 @Table(name = "locatario")
 public class Locatario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "locatario_id")
     private int locatarioId;
 
     private String nombre;
@@ -75,6 +84,25 @@ public class Locatario {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public Locatario(String nombre, String dni, int telefono, String email, String direccion) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+    }
+
+    public Locatario() {
+    }
+
+    public Inmueble getInmueble() {
+        return inmueble;
+    }
+
+    public void setInmueble(Inmueble inmueble) {
+        this.inmueble = inmueble;
     }
 
 
