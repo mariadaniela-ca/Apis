@@ -13,6 +13,7 @@ import ar.com.ada.api.billeteravirtual.entities.Cuenta;
 import ar.com.ada.api.billeteravirtual.entities.Movimiento;
 import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.repo.BilleteraRepository;
+import ar.com.ada.api.billeteravirtual.sistema.comms.EmailService;
 
 /**
  * BilleteraService
@@ -28,6 +29,9 @@ public class BilleteraService {
 
     @Autowired
     MovimientoService movimientoService;
+
+    @Autowired
+    EmailService emailService;
 
     public void save(Billetera b) {
         billeteraRepo.save(b);
@@ -91,6 +95,20 @@ public class BilleteraService {
         usuarioDestino.getPersona().getBilletera().agregarMovimiento(recibirDinero);
         billeteraRepo.save(usuarioDestino.getPersona().getBilletera());
 
+        
+        emailService.SendEmail(usuarioOrigen.getEmail(),"AVISO de Transferencia", 
+        "Se ha realizo la transferencia satisfactoriamente:\n Datos de transferencia:\n De: "+ 
+        usuarioOrigen.getPersona().getNombre() + "\n A: "+ usuarioDestino.getPersona().getNombre() +
+        "\n Email: "+ usuarioDestino.getEmail()+ "\n Fecha: "+ enviarDinero.getFechaMovimiento()+ 
+        "\n Monto: "+ enviarDinero.getImporte()+ 
+        "\n Si usted no ha realizado esta transferencia escriba al: resolvemosproblemas@gmail.com");
+
+        emailService.SendEmail(usuarioDestino.getEmail(),"AVISO de Transferencia", 
+        "Ha recibido una transferencia de:\n Datos de transferencia:\n De: "+ 
+        usuarioOrigen.getPersona().getNombre() + "\n Email: "+ usuarioOrigen.getEmail()+ 
+        "\n Fecha: "+ recibirDinero.getFechaMovimiento()+ 
+        "\n Importe: "+ recibirDinero.getImporte());
+        
     }
 
     public BigDecimal getSaldo(int id) {

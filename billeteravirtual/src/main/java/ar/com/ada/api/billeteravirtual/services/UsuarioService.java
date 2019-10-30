@@ -14,6 +14,7 @@ import ar.com.ada.api.billeteravirtual.entities.Persona;
 import ar.com.ada.api.billeteravirtual.entities.Usuario;
 import ar.com.ada.api.billeteravirtual.repo.UsuarioRepository;
 import ar.com.ada.api.billeteravirtual.security.Crypto;
+import ar.com.ada.api.billeteravirtual.sistema.comms.EmailService;
 
 /**
  * UsuarioService
@@ -27,11 +28,13 @@ public class UsuarioService {
     @Autowired
     PersonaService personaService;
 
+    @Autowired
+    EmailService emailService;
+
     public List<Usuario> getUsuarios() {
 
         return usuarioRepo.findAll();
     }
-
 
     public void save(Usuario u) {
 
@@ -46,12 +49,13 @@ public class UsuarioService {
         return null;
     }
 
-    public Usuario buscarUsuarioPorEmail(String email){
+    public Usuario buscarUsuarioPorEmail(String email) {
 
         Usuario u = usuarioRepo.findByEmail(email);
         return u;
     }
-    //Crea la persona, el usuario, una cuenta en pesos y la billetera.
+
+    // Crea la persona, el usuario, una cuenta en pesos y la billetera.
     public Usuario crearUsuario(String nombre, String dni, int edad, String email, String password) {
 
         Persona persona = new Persona();
@@ -70,19 +74,22 @@ public class UsuarioService {
         Billetera billetera = new Billetera();
 
         Cuenta cuenta = new Cuenta();
-        //La primera cuenta se crea en pesos argentinos
+        // La primera cuenta se crea en pesos argentinos
         cuenta.setMoneda("ARS");
-        
+
         billetera.agregarCuenta(cuenta);
         billetera.setPersona(persona);
 
         personaService.save(persona);
 
+        emailService.SendEmail(u.getEmail(), "Bienvenida a la Billetera Virtual!!!",
+                "Hola " + persona.getNombre() + "\nBienvenida a este hermoso proyecto hecho con mucho amor\n");
+
         return u;
 
     }
 
-    public Usuario buscarPorUsername(String username){
+    public Usuario buscarPorUsername(String username) {
 
         Usuario u = usuarioRepo.findByUsername(username);
         return u;

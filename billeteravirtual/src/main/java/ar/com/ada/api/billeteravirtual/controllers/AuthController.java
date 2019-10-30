@@ -14,7 +14,8 @@ import ar.com.ada.api.billeteravirtual.models.response.RegistrationResponse;
 import ar.com.ada.api.billeteravirtual.security.jwt.JWTTokenUtil;
 import ar.com.ada.api.billeteravirtual.services.JWTUserDetailsService;
 import ar.com.ada.api.billeteravirtual.services.PersonaService;
-import ar.com.ada.api.billeteravirtual.services.UsuarioService;;
+import ar.com.ada.api.billeteravirtual.services.UsuarioService;
+import ar.com.ada.api.billeteravirtual.sistema.comms.EmailService;;
 
 
 /**
@@ -34,6 +35,9 @@ public class AuthController {
 
     @Autowired
     private JWTUserDetailsService userDetailsService;
+
+    @Autowired
+    private EmailService emailService;
 
 
 

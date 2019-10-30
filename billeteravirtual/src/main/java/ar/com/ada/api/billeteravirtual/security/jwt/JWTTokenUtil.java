@@ -72,7 +72,7 @@ public class JWTTokenUtil implements Serializable {
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
-
+    // String es el tipo clave(key), y object es el tipo de objeto.
         return doGenerateToken(claims, userDetails.getUsername());
 
     }
