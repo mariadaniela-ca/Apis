@@ -95,12 +95,12 @@ public class BilleteraService {
         usuarioDestino.getPersona().getBilletera().agregarMovimiento(recibirDinero);
         billeteraRepo.save(usuarioDestino.getPersona().getBilletera());
 
-        
+
         emailService.SendEmail(usuarioOrigen.getEmail(),"AVISO de Transferencia", 
         "Se ha realizo la transferencia satisfactoriamente:\n Datos de transferencia:\n De: "+ 
         usuarioOrigen.getPersona().getNombre() + "\n A: "+ usuarioDestino.getPersona().getNombre() +
         "\n Email: "+ usuarioDestino.getEmail()+ "\n Fecha: "+ enviarDinero.getFechaMovimiento()+ 
-        "\n Monto: "+ enviarDinero.getImporte()+ 
+        "\n Monto: "+ importe+ 
         "\n Si usted no ha realizado esta transferencia escriba al: resolvemosproblemas@gmail.com");
 
         emailService.SendEmail(usuarioDestino.getEmail(),"AVISO de Transferencia", 
