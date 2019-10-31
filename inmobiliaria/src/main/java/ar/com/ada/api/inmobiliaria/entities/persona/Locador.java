@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
+import ar.com.ada.api.inmobiliaria.entities.usuario.Usuario;
 
 /**
  * Locador
@@ -37,6 +39,10 @@ public class Locador {
     private String email;
 
     private String direccion;
+
+    @OneToOne(mappedBy = "locatario", cascade = CascadeType.ALL)
+    private Usuario usuario;
+
 
     @OneToMany(mappedBy = "locador", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -97,6 +103,26 @@ public class Locador {
 
     public int getLocadorId() {
         return locadorId;
+    }
+
+    public void setLocadorId(int locadorId) {
+        this.locadorId = locadorId;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Inmueble> getInmuebles() {
+        return inmuebles;
+    }
+
+    public void setInmuebles(List<Inmueble> inmuebles) {
+        this.inmuebles = inmuebles;
     }
 
     

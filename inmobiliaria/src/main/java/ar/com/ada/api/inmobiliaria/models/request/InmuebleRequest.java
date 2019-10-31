@@ -21,4 +21,6 @@ public class InmuebleRequest {
 
     public int id;
 
+    public int amenitieId;
+
 }

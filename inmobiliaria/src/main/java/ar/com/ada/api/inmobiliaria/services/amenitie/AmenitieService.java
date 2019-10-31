@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.com.ada.api.inmobiliaria.entities.amenitie.Amenitie;
+import ar.com.ada.api.inmobiliaria.entities.amenitie.AmenitieDeInmueble;
+import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
 import ar.com.ada.api.inmobiliaria.repositorys.amenitie.AmenitieRepository;
+import ar.com.ada.api.inmobiliaria.services.inmueble.InmuebleService;
 
 /**
  * AmenitieService
@@ -18,27 +20,35 @@ public class AmenitieService {
     @Autowired
     AmenitieRepository repoAmenitie;
 
-    public void guardarAmenitie(Amenitie amenitie) {
+    @Autowired
+    InmuebleService inmuebleService;
+
+    public void guardarAmenitie(AmenitieDeInmueble amenitie) {
         repoAmenitie.save(amenitie);
     }
 
-    public Amenitie registrarAmenitie(String descripcion) {
-        Amenitie amenitie = new Amenitie();
+    public AmenitieDeInmueble registrarAmenitie(int inmuebleId, String ascensor, String pileta, String gimnasio) {
+        AmenitieDeInmueble amenitie = new AmenitieDeInmueble();
 
-        amenitie.setDescripcion(descripcion);
+        Inmueble i = inmuebleService.buscarInmueblePorId(inmuebleId);
+    
+        amenitie.setAscensor(ascensor);
+        amenitie.setGimnasio(gimnasio);
+        amenitie.setPileta(pileta);
+        amenitie.setInmueble(i);
 
         repoAmenitie.save(amenitie);
         return amenitie;
 
     }
 
-    public List<Amenitie> getAmenities() {
+    public List<AmenitieDeInmueble> getAmenities() {
 
         return repoAmenitie.findAll();
     }
 
-    public Amenitie buscarAmenitiePorId(int id) {
-        Optional<Amenitie> amenitie = repoAmenitie.findById(id);
+    public AmenitieDeInmueble buscarAmenitiePorId(int id) {
+        Optional<AmenitieDeInmueble> amenitie = repoAmenitie.findById(id);
 
         if (amenitie.isPresent())
             return amenitie.get();

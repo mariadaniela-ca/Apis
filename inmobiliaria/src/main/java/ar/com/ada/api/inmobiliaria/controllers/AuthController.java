@@ -58,6 +58,17 @@ public class AuthController {
         p.message = "Creaste un usuario con éxito.";
         return p;
     }
+
+    @PostMapping("auth/locadores")
+    public PostResponse postnewUsuarioLocador(@RequestBody AuthRequest req) {
+        PostResponse p = new PostResponse();
+
+        usuarioService.agregarUsuarioLocador(req.nombre, req.dni, req.telefono, req.direccion, req.email, req.password);
+        p.isOk = true;
+        p.message = "Creaste un usuario con éxito.";
+        return p;
+    }
+
     @PostMapping("auth/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest authenticationRequest)
             throws Exception {

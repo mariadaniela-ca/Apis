@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import ar.com.ada.api.inmobiliaria.entities.caracteristica.Caracteristica;
-import ar.com.ada.api.inmobiliaria.models.request.DescripcionRequest;
+import ar.com.ada.api.inmobiliaria.entities.caracteristica.CaracteristicaDeInmueble;
+import ar.com.ada.api.inmobiliaria.models.request.CaracteristicaRequest;
 import ar.com.ada.api.inmobiliaria.models.response.PostResponse;
 import ar.com.ada.api.inmobiliaria.services.caracteristica.CaracteristicaService;
 
@@ -25,10 +24,11 @@ public class CaracteristicaController {
     CaracteristicaService caracteristicaService;
 
     @PostMapping("caracteristicas")
-    public PostResponse postRegistrarCaracteristica(@RequestBody DescripcionRequest req ){
+    public PostResponse postRegistrarCaracteristica(@RequestBody CaracteristicaRequest req ){
         PostResponse c = new PostResponse();
-        caracteristicaService.registrarCaracteristica(req.descripcion);
+        caracteristicaService.registrarCaracteristica(req.inmuebleId, req.ambientes, req.balcon, req.baños, req.cochera, req.patio, req.terraza);
 
+        
         c.isOk = true;
         c.message = "Caracteristica registrada con éxito";
         
@@ -36,18 +36,18 @@ public class CaracteristicaController {
     }
 
     @GetMapping("caracteristicas")
-    public List<Caracteristica> getCaracteristicas(){
+    public List<CaracteristicaDeInmueble> getCaracteristicas(){
 
-        List<Caracteristica> listaCaracteristicas = caracteristicaService.getCaracteristicas();
+        List<CaracteristicaDeInmueble> listaCaracteristicas = caracteristicaService.getCaracteristicas();
 
         return listaCaracteristicas;
 
     }
 
     @GetMapping("caracteristicas/{id}")
-    public Caracteristica getCaracteristicaById(@PathVariable int id){
+    public CaracteristicaDeInmueble getCaracteristicaById(@PathVariable int id){
 
-        Caracteristica c = caracteristicaService.buscarCaracteristicaPorId(id);
+        CaracteristicaDeInmueble c = caracteristicaService.buscarCaracteristicaPorId(id);
 
         return c;
 

@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.ada.api.inmobiliaria.entities.inmobiliaria.Inmobiliaria;
 import ar.com.ada.api.inmobiliaria.entities.operacion.Operacion;
+import ar.com.ada.api.inmobiliaria.entities.persona.Locador;
 import ar.com.ada.api.inmobiliaria.entities.persona.Locatario;
 
 /**
@@ -41,6 +43,10 @@ public class Usuario {
     @JoinColumn(name = "inmobiliaria_id", referencedColumnName = "inmobiliaria_id")
     private Inmobiliaria inmobiliaria;
 
+    @OneToOne
+    @JoinColumn(name = "locador_id", referencedColumnName = "locador_id")
+    private Locador locador;
+  
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Operacion> operaciones;
 
@@ -114,6 +120,14 @@ public class Usuario {
 
     public void setOperaciones(List<Operacion> operaciones) {
         this.operaciones = operaciones;
+    }
+
+    public Locador getLocador() {
+        return locador;
+    }
+
+    public void setLocador(Locador locador) {
+        this.locador = locador;
     }
 
 }

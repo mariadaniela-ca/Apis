@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
-import ar.com.ada.api.inmobiliaria.entities.usuario.Usuario;
 
 /**
  * Locatario

@@ -13,6 +13,7 @@ import ar.com.ada.api.inmobiliaria.entities.inmueble.Inmueble;
 import ar.com.ada.api.inmobiliaria.entities.persona.Locador;
 import ar.com.ada.api.inmobiliaria.entities.persona.Locatario;
 import ar.com.ada.api.inmobiliaria.repositorys.inmueble.InmuebleRepository;
+import ar.com.ada.api.inmobiliaria.services.amenitie.AmenitieService;
 import ar.com.ada.api.inmobiliaria.services.inmobiliaria.InmobiliariaService;
 import ar.com.ada.api.inmobiliaria.services.persona.LocadorService;
 
@@ -30,6 +31,9 @@ public class InmuebleService {
 
     @Autowired
     LocadorService locadorService;
+
+    @Autowired
+    AmenitieService amenitieService;
 
     public void guardarInmueble(Inmueble inmueble) {
         repoInmueble.save(inmueble);
@@ -60,8 +64,8 @@ public class InmuebleService {
 
     }
 
-    public Inmueble registrarInmuebleConLocador(String direccion, BigDecimal precio, String estado,
-            double superficie, int antiguedad, int locadorId, String tipoInmueble) {
+    public Inmueble registrarInmuebleConLocador(String direccion, BigDecimal precio, String estado, double superficie,
+            int antiguedad, int locadorId, String tipoInmueble) {
 
         Inmueble inmueble = new Inmueble();
         Locador locador = locadorService.buscarLocadorPorId(locadorId);
@@ -98,6 +102,7 @@ public class InmuebleService {
         return i;
 
     }
+
     public Inmueble modificarPrecioEnInmueble(int id, BigDecimal precio) {
 
         Inmueble i = buscarInmueblePorId(id);
@@ -109,75 +114,21 @@ public class InmuebleService {
 
     }
 
-    public List<Inmueble> buscarPorEstado(String estado) {
-        return repoInmueble.findByEstado(estado);
-    }
-
-    public List<Inmueble> getInmuebleAlquiler() {
+    public List<Inmueble> getInmuebleVenta() {
 
         List<Inmueble> inmueblecitos = new ArrayList<Inmueble>();
 
         for (Inmueble t : getInmuebles()) {
-            if (t.getEstado().equals("alquilado")) {
+            if (t.getEstado().equals("Vendido")) {
                 Inmueble i = t;
 
                 inmueblecitos.add(i);
             }
-            
+
         }
 
         return inmueblecitos;
+
     }
 
-    public List<Inmueble> getInmuebleReserva(){
-
-        List<Inmueble> inmueblecitos = new ArrayList<Inmueble>();
-
-        for (Inmueble t : getInmuebles()) {
-            if (t.getEstado().equals("reservado")) {
-                Inmueble i = t;
-            
-                inmueblecitos.add(i);
-            }
-            
-        }
-
-        return inmueblecitos;
-    }
-
-    public List<Inmueble> getInmuebleVenta(){
-
-    List <Inmueble> inmueblecitos = new ArrayList<Inmueble>();
-
-    for (Inmueble t : getInmuebles()) {
-        if (t.getEstado().equals("reservado")) {
-            Inmueble i = t;
-
-            inmueblecitos.add(i);
-        }
-        
-    }
-
-    return inmueblecitos;
-    
-    }
-
-    public List<Inmueble> getInmuebleDisponible(){
-
-        List<Inmueble> inmueblecitos = new ArrayList<Inmueble>();
-
-        for (Inmueble t : getInmuebles()) {
-            if (t.getEstado().equals("disponible")) {
-                Inmueble i = t;
-
-                inmueblecitos.add(i);
-            }
-            
-        }
-
-        return inmueblecitos;
-    }
-    }
-
-
-
+}

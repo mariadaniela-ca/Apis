@@ -8,13 +8,16 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.inmobiliaria.entities.inmobiliaria.Inmobiliaria;
+import ar.com.ada.api.inmobiliaria.entities.persona.Locador;
 import ar.com.ada.api.inmobiliaria.entities.persona.Locatario;
 import ar.com.ada.api.inmobiliaria.entities.usuario.Usuario;
 import ar.com.ada.api.inmobiliaria.repositorys.inmobiliaria.InmobiliariaRepository;
+import ar.com.ada.api.inmobiliaria.repositorys.persona.LocadorRepository;
 import ar.com.ada.api.inmobiliaria.repositorys.persona.LocatarioRepository;
 import ar.com.ada.api.inmobiliaria.repositorys.usuario.UsuarioRepository;
 import ar.com.ada.api.inmobiliaria.security.Crypto;
 import ar.com.ada.api.inmobiliaria.services.inmobiliaria.InmobiliariaService;
+import ar.com.ada.api.inmobiliaria.services.persona.LocadorService;
 import ar.com.ada.api.inmobiliaria.services.persona.LocatarioService;
 
 /**
@@ -34,6 +37,9 @@ public class UsuarioService {
 
     @Autowired
     InmobiliariaService inmobiliariaService;
+
+    @Autowired
+    LocadorRepository repoLocador;
 
     @Autowired
     LocatarioService locatarioService;
@@ -74,7 +80,7 @@ public class UsuarioService {
         l.setTelefono(telefono);
         l.setDireccion(direccion);
         l.setEmail(email);
-        
+
         repoLocatario.save(l);
 
         u.setEmail(l.getEmail());
@@ -82,10 +88,33 @@ public class UsuarioService {
         u.setPassword(Crypto.encrypt(password, u.getEmail()));
         u.setLocatario(l);
 
-      
         repoUsuario.save(u);
         return u;
     }
+
+    public Usuario agregarUsuarioLocador(String nombre, String dni, int telefono, String direccion, String email,
+            String password) {
+
+       Locador l = new Locador();
+        Usuario u = new Usuario();
+
+        l.setNombre(nombre);
+        l.setDni(dni);
+        l.setTelefono(telefono);
+        l.setDireccion(direccion);
+        l.setEmail(email);
+
+        repoLocador.save(l);
+
+        u.setEmail(l.getEmail());
+        u.setUsername(l.getEmail());
+        u.setPassword(Crypto.encrypt(password, u.getEmail()));
+        u.setLocador(l);
+
+        repoUsuario.save(u);
+        return u;
+    }
+
 
     public List<Usuario> getUsuarios() {
 
@@ -114,18 +143,17 @@ public class UsuarioService {
     }
 
     /*
-    public void login(String username, String password) {
-
-        Usuario u = repoUsuario.findByUsername(username);
-
-        if(u == null || !u.getPassword().equals(Crypto.encrypt(password, u.getUsername()))) {
-
-            throw new BadCredentialsException("Usuario o contraseña invalida");
-        }
-
-    }
-    */
-
+     * public void login(String username, String password) {
+     * 
+     * Usuario u = repoUsuario.findByUsername(username);
+     * 
+     * if(u == null || !u.getPassword().equals(Crypto.encrypt(password,
+     * u.getUsername()))) {
+     * 
+     * throw new BadCredentialsException("Usuario o contraseña invalida"); }
+     * 
+     * }
+     */
 
     public Usuario buscarPorUsername(String username) {
 
@@ -133,6 +161,7 @@ public class UsuarioService {
         return u;
 
     }
+
     public void login(String username, String password) {
 
         Usuario u = repoUsuario.findByUsername(username);

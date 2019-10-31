@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.ada.api.inmobiliaria.entities.amenitie.Amenitie;
-import ar.com.ada.api.inmobiliaria.models.request.DescripcionRequest;
+import ar.com.ada.api.inmobiliaria.entities.amenitie.AmenitieDeInmueble;
+import ar.com.ada.api.inmobiliaria.models.request.AmenitieRequest;
 import ar.com.ada.api.inmobiliaria.models.response.PostResponse;
 import ar.com.ada.api.inmobiliaria.services.amenitie.AmenitieService;
 
@@ -24,10 +24,10 @@ public class AmenitieController {
     AmenitieService amenitieService;
 
     @PostMapping("/amenities")
-    public PostResponse postRegistrarAmenitie(@RequestBody DescripcionRequest req) {
+    public PostResponse postRegistrarAmenitie(@RequestBody AmenitieRequest req) {
 
         PostResponse a = new PostResponse();
-        amenitieService.registrarAmenitie(req.descripcion);
+        amenitieService.registrarAmenitie(req.inmuebleId,req.ascensor,req.gimnasio,req.pileta);
         a.isOk = true;
         a.message = "Amenitie registrada con éxito";
         return a;
@@ -35,17 +35,17 @@ public class AmenitieController {
     }
 
     @GetMapping("/amenities")
-    public List<Amenitie> getAmenities() {
+    public List<AmenitieDeInmueble> getAmenities() {
 
-        List<Amenitie> listaAmenities = amenitieService.getAmenities();
+        List<AmenitieDeInmueble> listaAmenities = amenitieService.getAmenities();
 
         return listaAmenities;
     }
 
     @GetMapping("/amenities/{id}")
-    public Amenitie getAmenitieById(@PathVariable int id) {
+    public AmenitieDeInmueble getAmenitieById(@PathVariable int id) {
 
-        Amenitie amenitie = amenitieService.buscarAmenitiePorId(id);
+        AmenitieDeInmueble amenitie = amenitieService.buscarAmenitiePorId(id);
         return amenitie;
 
     }
