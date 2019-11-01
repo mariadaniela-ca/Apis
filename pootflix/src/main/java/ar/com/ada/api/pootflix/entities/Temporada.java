@@ -3,9 +3,12 @@ package ar.com.ada.api.pootflix.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Temporada
  */
+@Document(collection = "Temporadas")
 public class Temporada {
     public int numeroTemporada;
     public List<Episodio> episodios = new ArrayList<Episodio>();

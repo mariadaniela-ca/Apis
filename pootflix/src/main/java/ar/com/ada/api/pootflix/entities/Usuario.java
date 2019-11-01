@@ -13,44 +13,32 @@ public class Usuario {
     @Id
     private ObjectId _id;
 
-    private String fullName;
+    private String nombre;
 
-    private String userName;
+    private String username;
     private String password;
-    private String userEmail;
-    
+    private String email;
 
-
-    public Usuario (String userName, String password, String email){
-        this.userName = userName;
+    public Usuario(String username, String password, String email) {
+        this.username = username;
         this.password = password;
-        this.userEmail = email;
+        this.email = email;
     }
 
-    public Usuario(){
+    public Usuario() {
 
     }
 
-
-    public Usuario (String password){
+    public Usuario(String password) {
         this.password = password;
     }
 
-    
     public ObjectId get_id() {
         return _id;
     }
 
     public void set_id(ObjectId _id) {
         this._id = _id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {
@@ -62,29 +50,40 @@ public class Usuario {
     }
 
     public String getUserEmail() {
-        return userEmail;
+        return email;
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        this.email = userEmail;
     }
 
-    
     @Override
     public String toString() {
-        return "Usuario [User Name=" + userName + ", Password=" + password + ", User Email=" + userEmail + "]";
+        return "Usuario [User Name=" + username + ", Password=" + password + ", User Email=" + email + "]";
     }
 
-
-    public String getFullName() {
-        return fullName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getNombre() {
+        return nombre;
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

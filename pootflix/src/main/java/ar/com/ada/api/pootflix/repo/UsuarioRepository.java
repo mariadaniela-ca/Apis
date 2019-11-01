@@ -13,6 +13,6 @@ import ar.com.ada.api.pootflix.entities.Usuario;
 @Repository
 public interface UsuarioRepository extends MongoRepository<Usuario, Integer> {
     Usuario findBy_id(ObjectId _id);    
-    Usuario findByUserName(String userName);
+    Usuario findByUsername(String username);
     Usuario findByUserEmail(String email);
 }

@@ -46,7 +46,7 @@ public class AuthController {
         ObjectId uId = usuarioService.crearUsuario(req.fullName, req.email, req.password);
 
         r.isOk = true;
-        r.message = "Te registraste con exitoooo";
+        r.message = "Usuario registrado con exito";
         r.userId = uId;
         return r;
 

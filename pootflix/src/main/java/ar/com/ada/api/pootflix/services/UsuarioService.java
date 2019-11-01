@@ -49,28 +49,28 @@ public class UsuarioService {
 
     public Usuario buscarPorUsername(String username) {
 
-        return repo.findByUserName(username);
+        return repo.findByUsername(username);
 
     }
 
-    public ObjectId crearUsuario(String fullName, String email, String password) {
+    public ObjectId crearUsuario(String nombre, String email, String password) {
 
         Usuario u = new Usuario();
-        u.setFullName(fullName);
-        u.setUserName(email);
-        u.setUserEmail(email);
+        u.setNombre(nombre);
+        u.setUsername(email);
+        u.setEmail(email);
 
         String passwordEnTextoClaro;
         String passwordEncriptada;
 
         passwordEnTextoClaro = password;
-        passwordEncriptada = Crypto.encrypt(passwordEnTextoClaro, u.getUserName());
+        passwordEncriptada = Crypto.encrypt(passwordEnTextoClaro, u.getUsername());
 
         u.setPassword(passwordEncriptada);
         repo.save(u);
 
         emailService.SendEmail(u.getUserEmail(), "Bienvenido a tu Nefly!!!",
-                "Hola " + u.getFullName()
+                "Hola " + u.getNombre()
                         + "\nBienvenido a este hermoso proyecto hecho por todas las alumnas de ADA Backend 8va Mañana\n"
                         + "Ademas te regalamos 100 pesitos");
 
@@ -80,9 +80,9 @@ public class UsuarioService {
 
     public void login(String username, String password) {
 
-        Usuario u = repo.findByUserName(username);
+        Usuario u = repo.findByUsername(username);
 
-        if (u == null || !u.getPassword().equals(Crypto.encrypt(password, u.getUserName()))) {
+        if (u == null || !u.getPassword().equals(Crypto.encrypt(password, u.getUsername()))) {
 
             throw new BadCredentialsException("Usuario o contraseña invalida");
         }

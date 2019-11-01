@@ -1,8 +1,11 @@
 package ar.com.ada.api.pootflix.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Episodio
  */
+@Document(collection = "Episodios")
 public class Episodio {
 
     public int nroEpisodio;

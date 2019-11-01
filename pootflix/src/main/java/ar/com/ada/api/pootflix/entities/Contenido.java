@@ -1,16 +1,42 @@
 package ar.com.ada.api.pootflix.entities;
 
-/**
- * Contenido
- */
 public class Contenido {
-
-    //Declarar variables de instancia: accesor tipo NombreVariable:
-
-    public String nombre;
-    
+    public String titulo;
     public String genero;
+    public String director;
+    public int anio;
 
-    public int año;
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
 
 }
