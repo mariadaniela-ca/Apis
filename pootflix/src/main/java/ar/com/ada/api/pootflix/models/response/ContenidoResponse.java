@@ -3,7 +3,8 @@ package ar.com.ada.api.pootflix.models.response;
 /**
  * PeliculaResponse
  */
-public class PeliculaResponse {
+public class ContenidoResponse {
 
-    public String message = "";
+    
+    public String message;
 }

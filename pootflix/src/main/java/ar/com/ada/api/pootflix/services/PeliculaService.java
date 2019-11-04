@@ -3,6 +3,7 @@ package ar.com.ada.api.pootflix.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class PeliculaService {
     @Autowired
     PeliculaRepository peliculaRepository;
 
-    public void registrarPelicula(String titulo, String genero, String director, int anio, Boolean ganoOscar){
+    public void registrarPelicula(String titulo, String genero, String director, int anio, Boolean ganoOscar) {
 
         Pelicula p = new Pelicula();
         p.setTitulo(titulo);
@@ -38,17 +39,20 @@ public class PeliculaService {
 
     }
 
-    public List<Pelicula> buscarPorGenero(String genero) {
+    public List<Pelicula> buscarPeliculas() {
 
-        List<Pelicula> listaPeliculas = new ArrayList<Pelicula>();
+        List<Pelicula> listaPeliculas = peliculaRepository.findAll();
 
-        for (Pelicula p : peliculaRepository.findAll()) {
-            if (p.getGenero().equals(genero)) {
-                listaPeliculas.add(p);
-            }
-
-        }
         return listaPeliculas;
 
     }
+
+    public Pelicula getPeliculaById(ObjectId _id){
+        Pelicula p = peliculaRepository.findBy_id(_id);
+     
+
+        return p;
+
+    }
+
 }

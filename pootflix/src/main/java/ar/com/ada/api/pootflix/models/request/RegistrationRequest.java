@@ -5,7 +5,7 @@ package ar.com.ada.api.pootflix.models.request;
  */
 public class RegistrationRequest {
 
-    public String fullName;
+    public String nombre;
     public String email;
     public String password;
     

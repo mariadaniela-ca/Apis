@@ -2,10 +2,13 @@ package ar.com.ada.api.pootflix.entities;
 
 public class Contenido {
     public String titulo;
-    public String genero;
-    public String director;
-    public int anio;
 
+    public String genero;
+
+    public String director;
+
+    public int anio;
+    
     public String getTitulo() {
         return titulo;
     }

@@ -3,6 +3,8 @@ package ar.com.ada.api.pootflix.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -10,24 +12,39 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "Temporadas")
 public class Temporada {
+
     public int numeroTemporada;
+
     public List<Episodio> episodios = new ArrayList<Episodio>();
     
 
     public Episodio getEpisodio(int nro)
     {
-        //Recorrer cada episodio
-        //Si el nro de episodio del ciclo es igual a "nro"
-        //Devolver esa episodio
         
-        for (Episodio epi : this.episodios) {
-            if(epi.nroEpisodio == nro)
+        for (Episodio e : this.episodios) {
+            if(e.nroEpisodio == nro)
             {
-                return epi;
+                return e;
             }
             
         }
 
         return null;
+    }
+
+    public int getNumeroTemporada() {
+        return numeroTemporada;
+    }
+
+    public void setNumeroTemporada(int numeroTemporada) {
+        this.numeroTemporada = numeroTemporada;
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        this.episodios = episodios;
     }
 }
