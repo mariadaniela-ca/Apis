@@ -8,7 +8,7 @@ public class Contenido {
     public String director;
 
     public int anio;
-    
+
     public String getTitulo() {
         return titulo;
     }
@@ -40,6 +40,5 @@ public class Contenido {
     public void setAnio(int anio) {
         this.anio = anio;
     }
-
 
 }

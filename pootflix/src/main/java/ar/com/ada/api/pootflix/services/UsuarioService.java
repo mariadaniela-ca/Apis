@@ -71,8 +71,7 @@ public class UsuarioService {
 
         emailService.SendEmail(u.getUserEmail(), "Bienvenido a Pootflix!!!",
                 "Hola " + u.getNombre()
-                        + "\nBienvenido a este hermoso proyecto hecho por todas las alumnas de ADA Backend 8va Mañana\n"
-                        + "Ademas te regalamos 100 pesitos");
+                        + "\nGracias por registrar en Pootflix!\n");
 
         return u.get_id();
 

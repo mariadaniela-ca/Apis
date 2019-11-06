@@ -16,7 +16,9 @@ public class Usuario {
     private String nombre;
 
     private String username;
+
     private String password;
+
     private String email;
 
     public Usuario(String username, String password, String email) {

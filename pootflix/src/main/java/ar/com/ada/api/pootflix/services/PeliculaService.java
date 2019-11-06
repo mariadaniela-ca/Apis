@@ -1,6 +1,5 @@
 package ar.com.ada.api.pootflix.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;

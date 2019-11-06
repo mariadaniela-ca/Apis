@@ -17,20 +17,17 @@ public class Serie extends Contenido {
     private ObjectId _id;
 
     public List<Temporada> temporadas = new ArrayList<Temporada>();
-    
 
-    public Temporada getTemporada(int nro)
-    {
-        //Recorrer cada temporada
-        //Si el nro de temporada del ciclo es igual a "nro"
-        //Devolver esa temporada
-        
+    public Temporada getTemporada(int nro) {
+        // Recorrer cada temporada
+        // Si el nro de temporada del ciclo es igual a "nro"
+        // Devolver esa temporada
+
         for (Temporada tempo : this.temporadas) {
-            if(tempo.numeroTemporada == nro)
-            {
+            if (tempo.numeroTemporada == nro) {
                 return tempo;
             }
-            
+
         }
 
         return null;

@@ -10,8 +10,8 @@ public class ContenidoRequest {
     public String director;
     public int anio;
     public boolean ganoOscar;
-    public int nroEpisodio;
-    public int temporada;
+    public int numeroEpisodio;
+    public int numeroTemporada;
     public int duracion;
 
 

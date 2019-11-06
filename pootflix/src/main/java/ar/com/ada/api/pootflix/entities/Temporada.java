@@ -13,20 +13,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Temporadas")
 public class Temporada {
 
+    @Id
+    private ObjectId _id;
+    
     public int numeroTemporada;
 
     public List<Episodio> episodios = new ArrayList<Episodio>();
-    
 
-    public Episodio getEpisodio(int nro)
-    {
-        
+    public Episodio getEpisodio(int nro) {
+
         for (Episodio e : this.episodios) {
-            if(e.nroEpisodio == nro)
-            {
+            if (e.nroEpisodio == nro) {
                 return e;
             }
-            
+
         }
 
         return null;

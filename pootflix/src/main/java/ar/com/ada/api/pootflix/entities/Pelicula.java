@@ -14,7 +14,7 @@ public class Pelicula extends Contenido {
 
     @Id
     private ObjectId _id;
-    
+
     @JsonIgnore
     public boolean ganoOscar;
 

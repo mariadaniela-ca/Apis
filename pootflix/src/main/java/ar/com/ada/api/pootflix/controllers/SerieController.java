@@ -33,27 +33,4 @@ public class SerieController {
         return s;
     }
 
-
-    @PostMapping("/series/{_id}/temporadas")
-
-    public ContenidoResponse postRegistrarTemporada(@PathVariable ObjectId _id, @RequestBody ContenidoRequest req){
-
-        ContenidoResponse t = new ContenidoResponse();
-        serieService.registrarTemporada(_id, req.temporada);
-
-        t.message = "Temporada registrada con exito";
-
-        return t;
-    }
-    
-    @PostMapping("/series/{_id}/temporadas/episodios")
-    public ContenidoResponse postRegistrarEpisodio(@PathVariable ObjectId _id, @RequestBody ContenidoRequest req){
-        
-        ContenidoResponse s = new ContenidoResponse();
-        serieService.agregarEpisodios(_id, req.temporada, req.nroEpisodio, req.titulo, req.duracion);
-
-        s.message= "Episodio registrado con exito";
-
-        return s;
-    }
 }
