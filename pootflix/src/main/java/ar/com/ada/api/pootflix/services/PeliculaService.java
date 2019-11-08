@@ -46,9 +46,8 @@ public class PeliculaService {
 
     }
 
-    public Pelicula getPeliculaById(ObjectId _id){
+    public Pelicula getPeliculaById(ObjectId _id) {
         Pelicula p = peliculaRepository.findBy_id(_id);
-     
 
         return p;
 

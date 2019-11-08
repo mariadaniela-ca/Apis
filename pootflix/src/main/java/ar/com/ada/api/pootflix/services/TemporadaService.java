@@ -1,9 +1,7 @@
 package ar.com.ada.api.pootflix.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,7 @@ public class TemporadaService {
     @Autowired
     TemporadaRepository temporadaRepository;
 
-    public void registrarTemporada (int numeroTemporada){
+    public void registrarTemporada(int numeroTemporada) {
         Temporada t = new Temporada();
 
         t.setNumeroTemporada(numeroTemporada);
@@ -28,20 +26,19 @@ public class TemporadaService {
         temporadaRepository.save(t);
     }
 
-    public void registarEpisodio(int numeroTemporada, int numeroEpisodio,String titulo, int duracion){
+    public void registarEpisodio(int numeroTemporada, int numeroEpisodio, String titulo, int duracion) {
         Temporada t = temporadaRepository.findByNumeroTemporada(numeroTemporada);
 
         List<Episodio> listaEpisodios = t.getEpisodios();
-        
+
         Episodio e = new Episodio();
         e.setNroEpisodio(numeroEpisodio);
         e.setTitulo(titulo);
         e.setDuracion(duracion);
 
         listaEpisodios.add(e);
-        
-        temporadaRepository.save(t);
 
+        temporadaRepository.save(t);
 
     }
 }

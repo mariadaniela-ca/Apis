@@ -13,9 +13,6 @@ import ar.com.ada.api.pootflix.repo.UsuarioRepository;
 import ar.com.ada.api.pootflix.security.Crypto;
 import ar.com.ada.api.pootflix.sistema.comms.EmailService;
 
-
-
-
 /**
  * UsuarioService
  */
@@ -70,8 +67,7 @@ public class UsuarioService {
         repo.save(u);
 
         emailService.SendEmail(u.getUserEmail(), "Bienvenido a Pootflix!!!",
-                "Hola " + u.getNombre()
-                        + "\nGracias por registrar en Pootflix!\n");
+                "Hola " + u.getNombre() + "\nGracias por registrar en Pootflix!\n");
 
         return u.get_id();
 

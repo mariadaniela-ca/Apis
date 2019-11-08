@@ -1,6 +1,5 @@
 package ar.com.ada.api.pootflix.services;
 
-
 import ar.com.ada.api.pootflix.entities.Pelicula;
 import ar.com.ada.api.pootflix.entities.Serie;
 
@@ -10,13 +9,12 @@ import ar.com.ada.api.pootflix.entities.Serie;
 public class PootflixService {
 
     public static Pelicula BuscarPeli(String nombre) {
-        //Aca repo a buscar las pelis
+        // Aca repo a buscar las pelis
         return null;
     }
 
-    
     public static Serie BuscarSerie(String nombre) {
-        //aca repo a buscar las series
+        // aca repo a buscar las series
         return null;
     }
 
